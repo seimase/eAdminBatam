@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:font="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    card_view:cardCornerRadius="5dp"
+    style="@style/MyCardViewStyle"
+    card_view:cardUseCompatPadding="true" >
+
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_5">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/grey_dark"
+                android:id="@+id/view3" />
+
+            <ui.CustomtextView
+                font:name = "GOTHAM_BOLD"
+                android:textSize="@dimen/space_12"
+                android:id="@+id/text_Date"
+                android:text="Senin,19 sept 2016"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_5"
+                android:layout_below="@+id/view3"
+                android:layout_marginTop="@dimen/space_5" />
+
+            <ui.CustomtextView
+                font:name = "GOTHAM_BOLD"
+                android:textSize="@dimen/space_12"
+                android:id="@+id/text_time"
+                android:text="10:46 AM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_below="@+id/view3"
+                android:layout_toRightOf="@+id/layout_attachment"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_alignRight="@+id/btn_pay"
+                android:layout_alignEnd="@+id/btn_pay" />
+
+            <RelativeLayout
+                android:id="@+id/layout_attachment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_40"
+                android:background="@color/colorListItem"
+                android:layout_below="@+id/text_Date"
+                android:layout_marginLeft="@dimen/space_5"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_marginBottom="@dimen/space_20"
+                android:layout_toLeftOf="@+id/btn_pay"
+                android:layout_toStartOf="@+id/btn_pay"
+                android:layout_marginRight="@dimen/space_5">
+
+                <ui.CustomtextView
+                    font:name="GOTHAM_LIGHTITALIC"
+                    android:textSize="@dimen/space_12"
+                    android:id="@+id/lbl_attach"
+                    android:text="Attachemnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:maxLines="1" />
+
+                <ui.CustomtextView
+                    font:name="GOTHAM_LIGHTITALIC"
+                    android:textSize="@dimen/space_12"
+                    android:id="@+id/lbl_size"
+                    android:text="Attachemnt asdas asdas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lbl_attach"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="italic"
+                    android:maxLines="1"
+                    android:layout_marginLeft="@dimen/space_5"/>
+
+
+            </RelativeLayout>
+
+            <ui.CustomtextView
+                android:id="@+id/btn_pay"
+                android:layout_width="@dimen/space_80"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape_all"
+                android:gravity="center"
+                android:text="Ditolak"
+                android:textColor="#ffffff"
+
+                font:name="GOTHAM_BOLD"
+                android:layout_gravity="right"
+                android:layout_centerVertical="true"
+                android:layout_alignRight="@+id/text_Date"
+                android:layout_alignEnd="@+id/text_Date"
+                android:layout_marginRight="@dimen/space_5"
+                android:backgroundTint="@color/colorReject" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

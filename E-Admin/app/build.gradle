@@ -1,29 +1,132 @@
 apply plugin: 'com.android.application'
 
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+apply plugin: 'io.fabric'
+
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.bpbatam.eadmin"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+    }
+    /*
+         MD5:  C4:37:51:1F:B5:C9:90:2C:79:D0:30:2A:CC:55:F8:F0
+         SHA1: 1F:18:1A:87:B1:22:19:A8:F2:C3:C4:23:9B:80:67:2C:05:13:78:ED
+     */
+    signingConfigs {
+        release {
+            storeFile file("keystore_batam.jks")
+            storePassword "android"
+            keyAlias "keybatam"
+            keyPassword "android"
+        }
+        debug {
+            storeFile file("keystore_batam.jks")
+            storePassword "android"
+            keyAlias "keybatam"
+            keyPassword "android"
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+repositories {
+    maven {
+        url 'https://dl.bintray.com/ayz4sci/maven/'
     }
 }
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+    compile('com.google.apis:google-api-services-drive:v2-rev170-1.20.0') {
+        exclude module: 'httpclient' //by artifact name
+        exclude group: 'org.apache.httpcomponents' //by group
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient' //by both name and group
+    }
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true;
+    }
+    compile "com.github.bumptech.glide:glide:3.6.1"
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.google.android.gms:play-services-maps:9.0.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.11.0'
+    compile 'com.google.http-client:google-http-client-android:1.21.0'
+    compile 'com.google.api-client:google-api-client-android:1.21.0'
+    compile 'com.google.api-client:google-api-client-gson:1.21.0'
+    //Bootom Menu-----------------------------------------------
+    compile 'com.aurelhubert:ahbottomnavigation:1.3.3'
+    //Retrofit REST -------------------------------------------
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.0'
+
+    //CircleImage
+    compile 'com.alexzh:circleimageview:1.2.0'
+
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
+
+    //DownloadProgress
+    compile 'com.ayz4sci.androidfactory:downloadprogress:1.0.1'
+
+    //PDFViewer
+    compile 'com.github.barteksc:AndroidPdfViewer:2.1.0'
+    compile files('libs/picasso-2.5.2.jar')
+
+    //Firebase
+    compile 'com.google.firebase:firebase-core:9.0.1'
+    compile 'com.google.firebase:firebase-messaging:9.0.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
